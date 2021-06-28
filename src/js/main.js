@@ -6,7 +6,7 @@ const getData = async () => {
 
   const configData = () => {
     let mappedValues = ''
-    if (data.length < 0) {
+    if (data.length > 0) {
       data.forEach((type) => {
         mappedValues += `<tr>`;
         mappedValues += `<td>${type.commit.author.name}</td>`
