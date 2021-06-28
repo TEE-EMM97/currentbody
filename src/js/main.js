@@ -4,21 +4,24 @@ const getData = async () => {
   const res = await fetch(`https://api.github.com/repositories/19438/commits`);
   const data = await res.json();
 
-  const configNameData = () => {
-
+  const configData = () => {
     let mappedValues = ''
-    data.forEach((type) => {
-      mappedValues += `<tr>`;
-      mappedValues += `<td>${type.commit.author.name}</td>`
-      mappedValues += `<td>${type.commit.author.date}</td>`
-      mappedValues += `<td>${type.commit.message}</td>`
-      mappedValues += `<td><a href=${type.url} target="_blank">GitHub URL</a></td>
-      </tr>`;
-    })
-
+    if (data.length < 0) {
+      data.forEach((type) => {
+        mappedValues += `<tr>`;
+        mappedValues += `<td>${type.commit.author.name}</td>`
+        mappedValues += `<td>${type.commit.author.date}</td>`
+        mappedValues += `<td>${type.commit.message}</td>`
+        mappedValues += `<td><a href=${type.url} target="_blank">GitHub URL</a></td>
+        </tr>`;
+      })
+    } else {
+      mappedValues += `<h1>No data here</h1>`
+      console.log(mappedValues)
+    }
     tableContent.innerHTML = mappedValues
   }
-  configNameData();
+  configData();
 };
 
 getData();
